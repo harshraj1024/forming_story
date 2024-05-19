@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Story</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Your Completed Story</h1>
+  <div id="story-container">
+    <p id="story"></p>
+  </div>
+
+  <script>
+    // Function to get query parameters from URL
+    function getQueryParams() {
+      const params = {};
+      window.location.search.substring(1).split('&').forEach(param => {
+        const [key, value] = param.split('=');
+        params[key] = decodeURIComponent(value);
+      });
+      return params;
+    }
+
+    // Generate the story from the form data
+    function generateStory() {
+      const params = getQueryParams();
+      const story = `
+        Once upon a time, there was a ${params['animal-1']} who was very ${params['adj-1']}. 
+        One day, while it was ${params['verb-1']}, it met a ${params['animal-2']} and a ${params['animal-3']}. 
+        They decided to go on an adventure. After traveling ${params['num-1']} miles, 
+        they found a magical place where everything was ${params['speed']}. 
+        They remembered a quote: "${params['quote']}". 
+        They lived happily ever after with a meaningful message: "${params['message']}".
+      `;
+      document.getElementById('story').innerText = story;
+    }
+
+    // Generate the story on page load
+    window.onload = generateStory;
+  </script>
+</body>
+</html>
